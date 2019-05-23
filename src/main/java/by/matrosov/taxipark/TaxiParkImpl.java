@@ -6,6 +6,7 @@ import by.matrosov.taxipark.model.Trip;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class TaxiParkImpl implements TaxiPark{
     private final Set<Driver> allDrivers;
@@ -18,20 +19,19 @@ public class TaxiParkImpl implements TaxiPark{
         this.trips = trips;
     }
 
-    public Set<Driver> getAllDrivers() {
-        return allDrivers;
-    }
-
-    public Set<Passenger> getAllPassengers() {
-        return allPassengers;
-    }
-
-    public List<Trip> getTrips() {
-        return trips;
-    }
-
     @Override
     public Set<Driver> findFakeDrivers() {
-        return null;
+
+        if (trips == null){
+            return allDrivers;
+        }
+
+        Set<Driver> notFakeDrivers = trips.stream()
+                .map(Trip::getDriver)
+                .collect(Collectors.toSet());
+
+        return allDrivers.stream()
+                .filter(driver -> !notFakeDrivers.contains(driver))
+                .collect(Collectors.toSet());
     }
 }

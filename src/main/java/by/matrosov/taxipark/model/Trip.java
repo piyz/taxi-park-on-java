@@ -10,7 +10,25 @@ public class Trip {
     private final double discount;
     private final double cost;
 
-    public Trip(Driver driver, Set<Passenger> passengers, int duration, double distance, double discount, double cost) {
+    public Trip(Driver driver, Set<Passenger> passengers) {
+        this.driver = driver;
+        this.passengers = passengers;
+        this.duration = 0;
+        this.distance = 0;
+        this.discount = 0;
+        this.cost = (1 - discount) * (duration + distance);
+    }
+
+    public Trip(Driver driver, Set<Passenger> passengers, int duration, double distance) {
+        this.driver = driver;
+        this.passengers = passengers;
+        this.duration = duration;
+        this.distance = distance;
+        this.discount = 0;
+        this.cost = (1 - discount) * (duration + distance);
+    }
+
+    public Trip(Driver driver, Set<Passenger> passengers, int duration, double distance, double discount) {
         this.driver = driver;
         this.passengers = passengers;
         this.duration = duration;
