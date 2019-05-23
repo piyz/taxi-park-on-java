@@ -131,4 +131,39 @@ public class TaxiParkImplTest implements TaxiParkTest{
 
         Assert.assertEquals(expected, taxiPark.findFakeDrivers());
     }
+
+    @Test
+    public void test4() {
+        initDrivers(10);
+        initPassengers(20);
+
+        List<Trip> trips = new ArrayList<>(Arrays.asList(
+                new Trip(setDriver(6), setPassengers(0), 36, 1.0, 0.3),
+                new Trip(setDriver(7), setPassengers(3, 5), 34,11.0),
+                new Trip(setDriver(9), setPassengers(15, 1), 13, 12.0),
+                new Trip(setDriver(3), setPassengers(7), 15, 30, 0.2),
+                new Trip(setDriver(9), setPassengers(8, 6, 7, 11), 36, 16.0),
+                new Trip(setDriver(3), setPassengers(11, 8, 15, 6), 37, 32.0, 0.4),
+                new Trip(setDriver(2), setPassengers(1, 6), 12, 15, 0.1),
+                new Trip(setDriver(2), setPassengers(3, 2, 19), 2, 11.0, 0.2),
+                new Trip(setDriver(3), setPassengers(7, 5), 26, 10.0, 0.3),
+                new Trip(setDriver(3), setPassengers(6, 4),10, 35.0),
+                new Trip(setDriver(7), setPassengers(7, 14),27, 2.0, 0.3),
+                new Trip(setDriver(3), setPassengers(3, 11),1, 33.0),
+                new Trip(setDriver(7), setPassengers(3),26, 4.0, 0.4),
+                new Trip(setDriver(2), setPassengers(18, 7),15, 6.0, 0.4),
+                new Trip(setDriver(2), setPassengers(0, 1, 2),30, 17.0),
+                new Trip(setDriver(2), setPassengers(0, 11),32, 5.0, 0.4),
+                new Trip(setDriver(9), setPassengers(0, 15),27, 3.0),
+                new Trip(setDriver(9), setPassengers(11, 15),11, 15.0,0.2),
+                new Trip(setDriver(2), setPassengers(12, 14, 8),31, 34.0),
+                new Trip(setDriver(7), setPassengers(15, 11),1, 3.0)
+        ));
+
+        TaxiParkImpl taxiPark = new TaxiParkImpl(driverSet, passengerSet, trips);
+        Set<Driver> expected = new HashSet<>(Arrays.asList(setDriver(0), setDriver(1), setDriver(4),
+                setDriver(5), setDriver(8)));
+
+        Assert.assertEquals(expected, taxiPark.findFakeDrivers());
+    }
 }
