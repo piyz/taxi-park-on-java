@@ -5,9 +5,10 @@ import by.matrosov.taxipark.model.Passenger;
 
 import java.util.Set;
 
-public interface TaxiParkTest {
+public interface TaxiParkUtil {
     void initDrivers(int size);
     void initPassengers(int size);
     Driver setDriver(int i);
     Set<Passenger> setPassengers(int... ints);
+    Set<Driver> setDrivers(int... ints);
 }
