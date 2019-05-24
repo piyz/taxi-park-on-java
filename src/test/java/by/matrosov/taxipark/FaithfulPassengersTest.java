@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-public class FaithfulPassengersUtil extends TaxiParkUtilImpl {
+public class FaithfulPassengersTest extends TaxiParkUtilImpl {
 
     @After
     public void clearLists(){

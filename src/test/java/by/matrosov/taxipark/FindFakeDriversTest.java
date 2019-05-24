@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.*;
 
 
-public class FindFakeDriversUtil extends TaxiParkUtilImpl {
+public class FindFakeDriversTest extends TaxiParkUtilImpl {
 
     @After
     public void clearLists(){

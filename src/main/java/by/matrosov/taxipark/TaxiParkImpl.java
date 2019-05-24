@@ -50,4 +50,19 @@ public class TaxiParkImpl implements TaxiPark{
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public Set<Passenger> findFrequentPassengers(Driver driver) {
+
+        if (trips == null) return new HashSet<>();
+
+        return trips.stream()
+                .filter(trip -> trip.getDriver() == driver)
+                .flatMap(trip -> trip.getPassengers().stream())
+                .collect(Collectors.groupingBy(passenger -> passenger, Collectors.counting()))
+                .entrySet().stream()
+                .filter(passengerLongEntry -> passengerLongEntry.getValue() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toSet());
+    }
 }
