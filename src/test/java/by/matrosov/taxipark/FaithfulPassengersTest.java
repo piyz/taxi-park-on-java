@@ -9,8 +9,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-
-public class TaxiParkImplTest implements TaxiParkTest{
+public class FaithfulPassengersTest implements TaxiParkTest{
 
     private static List<Driver> driverList = new ArrayList<>();
     private static List<Passenger> passengerList = new ArrayList<>();
@@ -41,7 +40,7 @@ public class TaxiParkImplTest implements TaxiParkTest{
     @Override
     public Set<Passenger> setPassengers(int... ints) {
         Set<Passenger> passengers = new HashSet<>();
-        for (int i = 0; i < ints.length; i++) {
+        for (int i : ints) {
             passengers.add(getPassenger(i));
         }
         return passengers;
@@ -63,73 +62,78 @@ public class TaxiParkImplTest implements TaxiParkTest{
         initPassengers(5);
 
         TaxiParkImpl taxiPark = new TaxiParkImpl(driverSet, passengerSet, null);
-        Set<Driver> expected = new HashSet<>(driverList);
+        Set<Passenger> expected = new HashSet<>(); //null
 
-        Assert.assertEquals(expected, taxiPark.findFakeDrivers());
+        Assert.assertEquals(expected, taxiPark.findFaithfulPassengers(1));
     }
 
     @Test
     public void test1() {
         initDrivers(3);
-        initPassengers(2);
+        initPassengers(5);
 
         List<Trip> trips = new ArrayList<>(Arrays.asList(
                 new Trip(setDriver(0), setPassengers(0)),
-                new Trip(setDriver(0), setPassengers(1))
+                new Trip(setDriver(1), setPassengers(0)),
+                new Trip(setDriver(0), setPassengers(3)),
+                new Trip(setDriver(2), setPassengers(3)),
+                new Trip(setDriver(0), setPassengers(4)),
+                new Trip(setDriver(1), setPassengers(4)),
+                new Trip(setDriver(1), setPassengers(1))
         ));
 
         TaxiParkImpl taxiPark = new TaxiParkImpl(driverSet, passengerSet, trips);
-        Set<Driver> expected = new HashSet<>(Arrays.asList(setDriver(1), setDriver(2)));
+        Set<Passenger> expected = setPassengers(0,3,4);
 
-        Assert.assertEquals(expected, taxiPark.findFakeDrivers());
+        Assert.assertEquals(expected, taxiPark.findFaithfulPassengers(2));
     }
 
     @Test
     public void test2() {
-        initDrivers(4);
-        initPassengers(10);
+        initDrivers(6);
+        initPassengers(6);
 
         List<Trip> trips = new ArrayList<>(Arrays.asList(
-                new Trip(setDriver(2), setPassengers(9), 9, 36.0),
-                new Trip(setDriver(1), setPassengers(0), 15, 28.0),
-                new Trip(setDriver(2), setPassengers(1), 37, 30.0),
-                new Trip(setDriver(0), setPassengers(9), 24, 10.0),
-                new Trip(setDriver(1), setPassengers(2), 1, 6.0),
-                new Trip(setDriver(0), setPassengers(0, 9), 9, 7.0),
-                new Trip(setDriver(2), setPassengers(3, 2, 8), 18, 39.0, 0.1),
-                new Trip(setDriver(1), setPassengers(9, 4), 19, 1.0, 0.2),
-                new Trip(setDriver(1), setPassengers(3), 16, 23.0),
-                new Trip(setDriver(2), setPassengers(4),10, 31.0, 0.2)
+                new Trip(setDriver(3), setPassengers(2), 9, 4.0, 0.3),
+                new Trip(setDriver(3), setPassengers(5,2,0), 13, 1.0, 0.2),
+                new Trip(setDriver(2), setPassengers(1,2,0), 33, 23.0),
+                new Trip(setDriver(2), setPassengers(5,4), 16, 5.0),
+                new Trip(setDriver(0), setPassengers(2,1), 37, 20.0),
+                new Trip(setDriver(1), setPassengers(2,4), 18, 22.0),
+                new Trip(setDriver(3), setPassengers(5), 20, 27.0, 0.1),
+                new Trip(setDriver(1), setPassengers(0,4), 18, 13.0, 0.1),
+                new Trip(setDriver(4), setPassengers(1,3), 19, 31.0, 0.2),
+                new Trip(setDriver(3), setPassengers(4),29, 11.0, 0.1)
         ));
 
         TaxiParkImpl taxiPark = new TaxiParkImpl(driverSet, passengerSet, trips);
-        Set<Driver> expected = new HashSet<>(Arrays.asList(setDriver(3)));
+        Set<Passenger> expected = setPassengers(0, 1, 2, 4, 5);
 
-        Assert.assertEquals(expected, taxiPark.findFakeDrivers());
+        Assert.assertEquals(expected, taxiPark.findFaithfulPassengers(3));
     }
 
     @Test
     public void test3() {
-        initDrivers(5);
-        initPassengers(10);
+        initDrivers(6);
+        initPassengers(6);
 
         List<Trip> trips = new ArrayList<>(Arrays.asList(
-                new Trip(setDriver(3), setPassengers(2), 24, 7.0),
-                new Trip(setDriver(3), setPassengers(8, 5, 9), 30, 23.0, 0.4),
-                new Trip(setDriver(3), setPassengers(4, 9, 3, 7), 24, 8.0),
-                new Trip(setDriver(1), setPassengers(2), 32, 27.0, 0.2),
-                new Trip(setDriver(3), setPassengers(0, 5, 7, 6), 38, 3.0, 0.2),
-                new Trip(setDriver(3), setPassengers(8, 0), 6, 39.0),
-                new Trip(setDriver(1), setPassengers(3, 1, 8), 18, 39.0, 0.2),
-                new Trip(setDriver(3), setPassengers(6, 5), 19, 21),
-                new Trip(setDriver(1), setPassengers(8, 0), 5, 5.0),
-                new Trip(setDriver(3), setPassengers(3, 7, 9),24, 20.0)
+                new Trip(setDriver(3), setPassengers(2), 5, 4.0, 0.3),
+                new Trip(setDriver(3), setPassengers(5, 2, 0), 13, 1.0, 0.2),
+                new Trip(setDriver(2), setPassengers(1, 2, 0), 33, 23.0),
+                new Trip(setDriver(2), setPassengers(5,4), 16, 5.0),
+                new Trip(setDriver(0), setPassengers(2,1), 37, 20.0),
+                new Trip(setDriver(1), setPassengers(2,4), 18, 22.0),
+                new Trip(setDriver(3), setPassengers(5), 20, 27.0,0.1),
+                new Trip(setDriver(1), setPassengers(0,4), 18, 13.0,0.1),
+                new Trip(setDriver(4), setPassengers(1,3), 19, 31.0,0.2),
+                new Trip(setDriver(3), setPassengers(4),29, 11.0,0.1)
         ));
 
         TaxiParkImpl taxiPark = new TaxiParkImpl(driverSet, passengerSet, trips);
-        Set<Driver> expected = new HashSet<>(Arrays.asList(setDriver(0), setDriver(2), setDriver(4)));
+        Set<Passenger> expected = setPassengers(2,4);
 
-        Assert.assertEquals(expected, taxiPark.findFakeDrivers());
+        Assert.assertEquals(expected, taxiPark.findFaithfulPassengers(4));
     }
 
     @Test

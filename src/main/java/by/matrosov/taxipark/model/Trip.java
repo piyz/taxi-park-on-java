@@ -60,4 +60,16 @@ public class Trip {
     public double getCost() {
         return cost;
     }
+
+    @Override
+    public String toString() {
+        return "Trip{" +
+                "driver=" + driver +
+                ", passengers=" + passengers +
+                ", duration=" + duration +
+                ", distance=" + distance +
+                ", discount=" + discount +
+                ", cost=" + cost +
+                '}';
+    }
 }
