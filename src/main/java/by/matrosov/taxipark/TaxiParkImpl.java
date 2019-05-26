@@ -65,4 +65,25 @@ public class TaxiParkImpl implements TaxiPark{
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public Set<Passenger> findSmartPassengers() {
+
+        if (trips == null) return new HashSet<>();
+
+        return allPassengers.stream()
+                .filter(passenger -> {
+
+                    long withDiscount = trips.stream()
+                            .filter(trip -> trip.getPassengers().contains(passenger) && trip.getDiscount() != 0)
+                            .count();
+
+                    long withoutDiscount = trips.stream()
+                            .filter(trip -> trip.getPassengers().contains(passenger) && trip.getDiscount() == 0)
+                            .count();
+
+                    return withDiscount > withoutDiscount;
+
+                }).collect(Collectors.toSet());
+    }
 }

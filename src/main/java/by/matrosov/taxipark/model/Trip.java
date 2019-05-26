@@ -37,6 +37,15 @@ public class Trip {
         this.cost = (1 - discount) * (duration + distance);
     }
 
+    public Trip(Driver driver, Set<Passenger> passengers, double discount) {
+        this.driver = driver;
+        this.passengers = passengers;
+        this.duration = 0;
+        this.distance = 0;
+        this.discount = discount;
+        this.cost = (1 - discount) * (duration + distance);
+    }
+
     public Driver getDriver() {
         return driver;
     }

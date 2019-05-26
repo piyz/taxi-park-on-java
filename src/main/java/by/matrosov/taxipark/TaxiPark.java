@@ -9,4 +9,5 @@ public interface TaxiPark {
     Set<Driver> findFakeDrivers();
     Set<Passenger> findFaithfulPassengers(int minTrips);
     Set<Passenger> findFrequentPassengers(Driver driver);
+    Set<Passenger> findSmartPassengers();
 }
