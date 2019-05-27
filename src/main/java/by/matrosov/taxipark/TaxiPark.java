@@ -10,4 +10,5 @@ public interface TaxiPark {
     Set<Passenger> findFaithfulPassengers(int minTrips);
     Set<Passenger> findFrequentPassengers(Driver driver);
     Set<Passenger> findSmartPassengers();
+    Set<Integer> findTheMostFrequentTripDurationPeriod();
 }

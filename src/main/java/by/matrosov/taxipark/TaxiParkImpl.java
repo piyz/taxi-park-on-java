@@ -4,10 +4,7 @@ import by.matrosov.taxipark.model.Driver;
 import by.matrosov.taxipark.model.Passenger;
 import by.matrosov.taxipark.model.Trip;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TaxiParkImpl implements TaxiPark{
@@ -85,5 +82,31 @@ public class TaxiParkImpl implements TaxiPark{
                     return withDiscount > withoutDiscount;
 
                 }).collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<Integer> findTheMostFrequentTripDurationPeriod() {
+
+        if (trips == null) return new HashSet<>();
+
+        Integer range = trips.stream()
+                .map(Trip::getDuration)
+                .collect(Collectors.groupingBy(integer -> integer / 10))
+                .entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().size()
+                ))
+                .entrySet().stream()
+                .max(Comparator.comparing(Map.Entry::getValue))
+                .get()
+                .getKey();
+
+        Set<Integer> set = new HashSet<>();
+        for (int i = 0; i < 10; i++) {
+            set.add(range * 10 + i);
+        }
+
+        return set;
     }
 }
