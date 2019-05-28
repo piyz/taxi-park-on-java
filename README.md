@@ -26,3 +26,14 @@ SubTask5
 Set<Passenger> findTheMostFrequentTripDurationPeriod(): Find the most frequent trip duration period among 
 minute periods 0..9, 10..19, 20..29, and so on. Return any suitable period if many are the most frequent, return null 
 if there're no trips.
+
+SubTask 6
+
+Boolean checkParetoPrinciple() Check whether no more than 20% of the drivers contribute 80% of the income. 
+The function should return true if the top 20% drivers (meaning the top 20% best performers) represent 80% or more of 
+all trips total income, or false if not. The drivers that have no trips should be considered as contributing zero 
+income. If the taxi park contains no trips, the result should be false.
+
+For example, if there're 39 drivers in the taxi park, we need to check that no more than 20% of the most successful 
+ones, which is seven drivers (39 * 0.2 = 7.8), contribute at least 80% of the total income. Note that eight drivers 
+out of 39 is 20.51% which is more than 20%, so we check the income of seven the most successful drivers.
