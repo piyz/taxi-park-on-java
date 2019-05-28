@@ -11,4 +11,5 @@ public interface TaxiPark {
     Set<Passenger> findFrequentPassengers(Driver driver);
     Set<Passenger> findSmartPassengers();
     Set<Integer> findTheMostFrequentTripDurationPeriod();
+    Boolean checkParetoPrinciple();
 }

@@ -109,4 +109,26 @@ public class TaxiParkImpl implements TaxiPark{
 
         return set;
     }
+
+    @Override
+    public Boolean checkParetoPrinciple() {
+
+        if (trips == null) return false;
+
+        int twentyPercentOfDrivers = (int) (allDrivers.size() * 0.2);
+
+        List<Double> incomesList = allDrivers.stream()
+                .map(driver ->
+                        trips.stream()
+                                .filter(trip -> trip.getDriver() == driver)
+                                .collect(Collectors.summarizingDouble(Trip::getCost))
+                                .getSum())
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+
+        double totalIncome = incomesList.stream().mapToDouble(Double::doubleValue).sum();
+        double incomeByTopDrivers = incomesList.stream().mapToDouble(Double::doubleValue).limit(twentyPercentOfDrivers).sum();
+
+        return incomeByTopDrivers / totalIncome > 0.8;
+    }
 }
