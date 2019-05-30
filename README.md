@@ -1,9 +1,8 @@
-### Taxi Park
+## Taxi Park
 
-### The TaxiPark class stores information about registered drivers, passengers, and their trips. Your task is to implement six functions which collect different statistics about the data.
+*The TaxiPark class stores information about registered drivers, passengers, and their trips. Your task is to implement six functions which collect different statistics about the data.*
 
-*Those six functions/methods you will find in TaxiParkImpl.class.*
-*After that how you implements those functions try to passed all tests.*
+*Those six functions/methods you will find in TaxiParkImpl.class. After that how you implements those functions try to passed all tests.*
 
 * 1. `Set<Driver> findFakeDrivers(): Find all the drivers who didn't perform any trips.`
 ---
